@@ -62,7 +62,7 @@ class UserController extends Controller
             ], 404);
         }
     }
-    public function userProfile(Request $request){
+    public function userProfile(){
 
         return response()->json([
             'status' => 1,
