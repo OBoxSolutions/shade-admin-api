@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\MessageCollection;
+use App\Http\Resources\MessageResource;
 use App\Models\Message;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class MessageController extends Controller
 {
@@ -15,7 +19,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        return new MessageCollection(Message::paginate(10));
     }
 
     /**
@@ -36,7 +40,25 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $validator = Validator::make($input, [
+            'name' => 'required',
+            'email' => 'required|email|unique:messages',
+            'social' => 'required',
+            'text' => 'required'
+        ]);
+
+        if($validator->fails()){
+        return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $message = Message::create($input);
+
+        return response()->json([
+            "success" => true,
+            "msg" => "Message created successfully.",
+            "message" => new MessageResource($message)
+        ]);
     }
 
     /**
@@ -47,7 +69,10 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        //
+        return response()->json([
+            'message' => new MessageResource($message),
+            'msg' => 'Success'],
+            200);
     }
 
     /**
@@ -70,7 +95,13 @@ class MessageController extends Controller
      */
     public function update(Request $request, Message $message)
     {
-        //
+        $message->update($request->all());
+
+        return response()->json([
+            "success" => true,
+            "msg" => "Message updated successfully.",
+            "message" => new MessageResource($message)
+        ]);
     }
 
     /**
@@ -81,6 +112,12 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-        //
+        $message->delete();
+
+        return response()->json([
+        "success" => true,
+        "msg" => "Message deleted successfully.",
+        "message" => new MessageResource($message)
+        ]);
     }
 }
