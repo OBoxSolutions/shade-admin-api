@@ -120,4 +120,61 @@ class MessageController extends Controller
         "message" => new MessageResource($message)
         ]);
     }
+
+        /**
+     * Filter messages.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     */
+    public function filter(Request $request)
+    {
+        $input = $request->all();
+        $validator = Validator::make($input, [
+            'category' => 'required',
+            'value' => 'required',
+        ]);
+
+        if($validator->fails()){
+            return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        switch($input['category']) {
+            case('name'):
+
+                $filterMessages = Message::where('name', 'LIKE', '%'.$input['value'].'%')->paginate(10);
+
+                break;
+
+            case('social'):
+
+                $filterMessages = Message::where('social', 'LIKE', $input['value'])->paginate(10);
+
+                break;
+            case('contact'):
+
+                $filterMessages = Message::where('contact', 'LIKE', $input['value'])->paginate(10);
+
+                break;
+            case('text'):
+
+                $filterMessages = Message::where('text', 'LIKE', '%'.$input['value'].'%')->paginate(10);
+
+                break;
+
+            default:
+                return response()->json([
+                    "success" => false,
+                    "msg" => 'Something went wrong.'
+                ]);
+        }
+
+        $messages = new MessageCollection($filterMessages);
+        return $messages->additional(['success'=>true, 'msg'=>'Filter successfully.']);
+
+        // return response()->json([
+        //     "success" => true,
+        //     "msg" => 'Filter successfully.',
+        //     "message" => new MessageCollection($filterMessages)
+        // ]);
+    }
 }
