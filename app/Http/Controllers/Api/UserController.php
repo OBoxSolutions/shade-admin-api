@@ -52,14 +52,14 @@ class UserController extends Controller
                 return response()->json([
                     'status' => 0,
                     'msg' => "Incorrect Password"
-                ], 404);
+                ], 200);
             }
         }
         else{
             return response()->json([
                 'status' => 0,
                 'msg' => "User not found"
-            ], 404);
+            ], 200);
         }
     }
     public function userProfile(){

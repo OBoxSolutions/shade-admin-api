@@ -15,8 +15,8 @@ class MessageFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
             'social' => $this->faker->randomElement(['Discord', 'Email', 'Messanger', 'Instagram']),
+            'contact' => $this->faker->unique()->safeEmail(),
             'text' => $this->faker->text()
         ];
     }

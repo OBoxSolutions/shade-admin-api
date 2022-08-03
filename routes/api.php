@@ -22,7 +22,10 @@ Route::post('login', [UserController::class, 'login']);
 Route::group(['middleware' => ["auth:sanctum"]], function(){
     Route::get('user-profile', [UserController::class, 'userProfile']);
     Route::get('logout', [UserController::class, 'logout']);
+
+    Route::get('/messages/filter', [MessageController::class, 'filter']);
     Route::resource('messages', Api\MessageController::class);
+
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
