@@ -141,7 +141,11 @@ class MessageController extends Controller
         ]);
 
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
+            // return $this->sendError('Validation Error.', $validator->errors());
+            return response()->json([
+                "success" => 0,
+                "msg" => "Error.", $validator->errors()
+            ]);
         }
 
         switch($input['category']) {

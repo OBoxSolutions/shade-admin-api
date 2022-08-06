@@ -41,9 +41,9 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
 
-        // if (config('app.debug')) {
-        //     return parent::render($request, $exception);
-        // }
+        if (config('app.debug')) {
+            return parent::render($request, $exception);
+        }
 
         if ($exception instanceof MethodNotAllowedException) {
             return response()->json(["success" => 0, "msg" => 'The specified method for the request is invalid'], 405);
