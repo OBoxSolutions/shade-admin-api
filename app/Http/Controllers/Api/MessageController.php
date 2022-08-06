@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\MessageCollection;
 use App\Http\Resources\MessageResource;
 use App\Models\Message;
+use Exception;
+use Throwable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MessageController extends Controller
 {
@@ -112,15 +114,19 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-        $message->delete();
+        // try{
+            $message->delete();
 
-        return response()->json([
-        "success" => true,
-        "msg" => "Message deleted successfully.",
-        "message" => new MessageResource($message)
-        ]);
+            return response()->json([
+            "success" => 1,
+            "msg" => "Message deleted successfully.",
+            "message" => new MessageResource($message)
+            ]);
+
+        // }catch(Throwable $e){
+        //     throw new $e;
+        // }
     }
-
         /**
      * Filter messages.
      *
