@@ -151,23 +151,23 @@ class MessageController extends Controller
         switch($input['category']) {
             case('name'):
 
-                $filterMessages = Message::where('name', 'LIKE', '%'.$input['value'].'%')->paginate(7);
+                $filterMessages = Message::where('name', 'ILIKE', '%'.$input['value'].'%')->paginate(7);
 
                 break;
 
             case('social'):
 
-                $filterMessages = Message::where('social', 'LIKE', $input['value'])->paginate(7);
+                $filterMessages = Message::where('social', 'ILIKE', $input['value'])->paginate(7);
 
                 break;
             case('contact'):
 
-                $filterMessages = Message::where('contact', 'LIKE', $input['value'])->paginate(7);
+                $filterMessages = Message::where('contact', 'ILIKE', $input['value'])->paginate(7);
 
                 break;
             case('text'):
 
-                $filterMessages = Message::where('text', 'LIKE', '%'.$input['value'].'%')->paginate(7);
+                $filterMessages = Message::where('text', 'ILIKE', '%'.$input['value'].'%')->paginate(7);
 
                 break;
 
