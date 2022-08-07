@@ -21,7 +21,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return new MessageCollection(Message::paginate(10));
+        return new MessageCollection(Message::paginate(7));
     }
 
     /**
@@ -151,23 +151,23 @@ class MessageController extends Controller
         switch($input['category']) {
             case('name'):
 
-                $filterMessages = Message::where('name', 'LIKE', '%'.$input['value'].'%')->paginate(10);
+                $filterMessages = Message::where('name', 'LIKE', '%'.$input['value'].'%')->paginate(7);
 
                 break;
 
             case('social'):
 
-                $filterMessages = Message::where('social', 'LIKE', $input['value'])->paginate(10);
+                $filterMessages = Message::where('social', 'LIKE', $input['value'])->paginate(7);
 
                 break;
             case('contact'):
 
-                $filterMessages = Message::where('contact', 'LIKE', $input['value'])->paginate(10);
+                $filterMessages = Message::where('contact', 'LIKE', $input['value'])->paginate(7);
 
                 break;
             case('text'):
 
-                $filterMessages = Message::where('text', 'LIKE', '%'.$input['value'].'%')->paginate(10);
+                $filterMessages = Message::where('text', 'LIKE', '%'.$input['value'].'%')->paginate(7);
 
                 break;
 
