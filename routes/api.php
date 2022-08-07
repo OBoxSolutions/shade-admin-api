@@ -23,7 +23,7 @@ Route::group(['middleware' => ["auth:sanctum"]], function(){
     Route::get('user-profile', [UserController::class, 'userProfile']);
     Route::get('logout', [UserController::class, 'logout']);
 
-    Route::get('/messages/filter', [MessageController::class, 'filter']);
+    Route::post('/messages/filter', [MessageController::class, 'filter']);
     Route::resource('messages', Api\MessageController::class);
 
 });

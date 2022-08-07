@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\MessageCollection;
 use App\Http\Resources\MessageResource;
 use App\Models\Message;
+use Exception;
+use Throwable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MessageController extends Controller
 {
@@ -19,7 +21,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return new MessageCollection(Message::paginate(10));
+        return new MessageCollection(Message::paginate(7));
     }
 
     /**
@@ -112,15 +114,19 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-        $message->delete();
+        // try{
+            $message->delete();
 
-        return response()->json([
-        "success" => true,
-        "msg" => "Message deleted successfully.",
-        "message" => new MessageResource($message)
-        ]);
+            return response()->json([
+            "success" => 1,
+            "msg" => "Message deleted successfully.",
+            "message" => new MessageResource($message)
+            ]);
+
+        // }catch(Throwable $e){
+        //     throw new $e;
+        // }
     }
-
         /**
      * Filter messages.
      *
@@ -135,29 +141,33 @@ class MessageController extends Controller
         ]);
 
         if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
+            // return $this->sendError('Validation Error.', $validator->errors());
+            return response()->json([
+                "success" => 0,
+                "msg" => "Error.", $validator->errors()
+            ]);
         }
 
         switch($input['category']) {
             case('name'):
 
-                $filterMessages = Message::where('name', 'LIKE', '%'.$input['value'].'%')->paginate(10);
+                $filterMessages = Message::where('name', 'LIKE', '%'.$input['value'].'%')->paginate(7);
 
                 break;
 
             case('social'):
 
-                $filterMessages = Message::where('social', 'LIKE', $input['value'])->paginate(10);
+                $filterMessages = Message::where('social', 'LIKE', $input['value'])->paginate(7);
 
                 break;
             case('contact'):
 
-                $filterMessages = Message::where('contact', 'LIKE', $input['value'])->paginate(10);
+                $filterMessages = Message::where('contact', 'LIKE', $input['value'])->paginate(7);
 
                 break;
             case('text'):
 
-                $filterMessages = Message::where('text', 'LIKE', '%'.$input['value'].'%')->paginate(10);
+                $filterMessages = Message::where('text', 'LIKE', '%'.$input['value'].'%')->paginate(7);
 
                 break;
 
