@@ -21,7 +21,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return new MessageCollection(Message::paginate(7));
+        return new MessageCollection(Message::all());
     }
 
     /**
