@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\HiringRequest;
 use App\Models\Message;
 use Illuminate\Database\Seeder;
 
@@ -16,5 +17,6 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         Message::factory(50)->create();
+        HiringRequest::factory(50)->create();
     }
 }
