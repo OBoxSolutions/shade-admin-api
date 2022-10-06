@@ -1,7 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Http\Resources\HiringRequestCollection;
+use App\Http\Resources\HiringRequestResource;
 use App\Models\HiringRequest;
 use Illuminate\Http\Request;
 
@@ -14,7 +17,7 @@ class HiringRequestController extends Controller
      */
     public function index()
     {
-        //
+        return new HiringRequestCollection(HiringRequest::all());
     }
 
     /**
@@ -46,7 +49,10 @@ class HiringRequestController extends Controller
      */
     public function show(HiringRequest $hiringRequest)
     {
-        //
+        return response()->json([
+            'hiring-request' => new HiringRequestResource($hiringRequest),
+            'msg' => 'Success'],
+            200);
     }
 
     /**
@@ -80,6 +86,12 @@ class HiringRequestController extends Controller
      */
     public function destroy(HiringRequest $hiringRequest)
     {
-        //
+        $hiringRequest->delete();
+
+        return response()->json([
+        "success" => 1,
+        "msg" => "Hiring request deleted successfully.",
+        "hiring-request" => new HiringRequestResource($hiringRequest)
+        ]);
     }
 }

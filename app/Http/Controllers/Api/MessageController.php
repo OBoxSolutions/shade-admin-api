@@ -6,11 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\MessageCollection;
 use App\Http\Resources\MessageResource;
 use App\Models\Message;
-use Exception;
-use Throwable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MessageController extends Controller
 {
