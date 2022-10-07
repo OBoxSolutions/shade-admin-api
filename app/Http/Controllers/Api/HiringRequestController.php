@@ -7,6 +7,7 @@ use App\Http\Resources\HiringRequestCollection;
 use App\Http\Resources\HiringRequestResource;
 use App\Models\HiringRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class HiringRequestController extends Controller
 {
@@ -38,7 +39,27 @@ class HiringRequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $validator = Validator::make($input, [
+            'name' => 'required',
+            'email' => 'required|unique:hiring-requests',
+            'country' => 'required',
+            'applying-for' => 'required',
+            'birthdate' => 'required',
+            'questions-answers' => 'required'
+        ]);
+
+        if($validator->fails()){
+        return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $hiringRequest = HiringRequest::create($input);
+
+        return response()->json([
+            "success" => true,
+            "msg" => "Hiring request created successfully.",
+            "hiring-request" => new HiringRequestResource($hiringRequest)
+        ]);
     }
 
     /**
@@ -75,7 +96,13 @@ class HiringRequestController extends Controller
      */
     public function update(Request $request, HiringRequest $hiringRequest)
     {
-        //
+        $hiringRequest->update($request->all());
+
+        return response()->json([
+            "success" => true,
+            "msg" => "Hiring request updated successfully.",
+            "hiring-request" => new HiringRequestResource($hiringRequest)
+        ]);
     }
 
     /**
@@ -89,7 +116,7 @@ class HiringRequestController extends Controller
         $hiringRequest->delete();
 
         return response()->json([
-        "success" => 1,
+        "success" => true,
         "msg" => "Hiring request deleted successfully.",
         "hiring-request" => new HiringRequestResource($hiringRequest)
         ]);
