@@ -42,7 +42,7 @@ class HiringRequestController extends Controller
         $input = $request->all();
         $validator = Validator::make($input, [
             'name' => 'required',
-            'email' => 'required|unique:hiring-requests',
+            'email' => 'required|unique:hiring_requests',
             'country' => 'required',
             'applying-for' => 'required',
             'birthdate' => 'required',
