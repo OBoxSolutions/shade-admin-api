@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Api\MessageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +24,9 @@ Route::group(['middleware' => ["auth:sanctum"]], function(){
 
     Route::post('/messages/filter', [MessageController::class, 'filter']);
     Route::resource('messages', Api\MessageController::class);
+    Route::resource('hiring-requests', Api\HiringRequestController::class);
+    Route::resource('chat-meetings', Api\ChatMeetingController::class);
+    Route::resource('voice-meetings', Api\VoiceMeetingController::class);
 
 });
 
