@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHiringRequestsTable extends Migration
+class CreateVoiceMeetingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,16 @@ class CreateHiringRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('hiring_requests', function (Blueprint $table) {
+        Schema::create('voice_meetings', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('country');
-            $table->string('applying-for');
             $table->string('birthdate');
-            $table->text('questions-answers')->nullable();
+            $table->string('app');
+            $table->string('meeting-date');
+            $table->string('time-before-meeting')->nullable();
+            $table->string('meeting-link');
             $table->timestamps();
         });
     }
@@ -32,6 +34,6 @@ class CreateHiringRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hiring_requests');
+        Schema::dropIfExists('voice_meetings');
     }
 }

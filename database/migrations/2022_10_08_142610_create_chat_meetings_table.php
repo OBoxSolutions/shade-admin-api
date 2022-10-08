@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateHiringRequestsTable extends Migration
+class CreateChatMeetingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,20 @@ class CreateHiringRequestsTable extends Migration
      */
     public function up()
     {
-        Schema::create('hiring_requests', function (Blueprint $table) {
+        Schema::create('chat_meetings', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('country');
-            $table->string('applying-for');
             $table->string('birthdate');
-            $table->text('questions-answers')->nullable();
+            $table->string('app');
+            $table->text('about')->nullable();
+            $table->text('goals')->nullable();
+            $table->text('budget')->nullable();
+            $table->text('logo-info')->nullable();
+            $table->string('logo-file')->nullable();
+            $table->text('more-info')->nullable();
+            $table->string('more-info-files')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +38,6 @@ class CreateHiringRequestsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hiring_requests');
+        Schema::dropIfExists('chat_meetings');
     }
 }
