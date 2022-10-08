@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ChatMeetingCollection;
+use App\Http\Resources\ChatMeetingResource;
 use App\Models\ChatMeeting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class ChatMeetingController extends Controller
 {
@@ -15,7 +19,7 @@ class ChatMeetingController extends Controller
      */
     public function index()
     {
-        //
+        return new ChatMeetingCollection(ChatMeeting::all());
     }
 
     /**
@@ -36,7 +40,25 @@ class ChatMeetingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $validator = Validator::make($input, [
+            'name' => 'required',
+            'email' => 'required|unique:chat_meetings',
+            'country' => 'required',
+            'birthdate' => 'required',
+        ]);
+
+        if($validator->fails()){
+        return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $chatMeeting = ChatMeeting::create($input);
+
+        return response()->json([
+            "success" => true,
+            "msg" => "Chat meeting created successfully.",
+            "chat-meeting" => new ChatMeetingResource($chatMeeting)
+        ]);
     }
 
     /**
@@ -47,7 +69,10 @@ class ChatMeetingController extends Controller
      */
     public function show(ChatMeeting $chatMeeting)
     {
-        //
+        return response()->json([
+            'chat-meeting' => new ChatMeetingResource($chatMeeting),
+            'msg' => 'Success'],
+            200);
     }
 
     /**
@@ -70,7 +95,13 @@ class ChatMeetingController extends Controller
      */
     public function update(Request $request, ChatMeeting $chatMeeting)
     {
-        //
+        $chatMeeting->update($request->all());
+
+        return response()->json([
+            "success" => true,
+            "msg" => "Chat meeting updated successfully.",
+            "chat-meeting" => new ChatMeetingResource($chatMeeting)
+        ]);
     }
 
     /**
@@ -81,6 +112,12 @@ class ChatMeetingController extends Controller
      */
     public function destroy(ChatMeeting $chatMeeting)
     {
-        //
+        $chatMeeting->delete();
+
+        return response()->json([
+        "success" => true,
+        "msg" => "Chat meeting deleted successfully.",
+        "chat-meeting" => new ChatMeetingResource($chatMeeting)
+        ]);
     }
 }
