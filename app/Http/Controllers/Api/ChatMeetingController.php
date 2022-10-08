@@ -45,6 +45,7 @@ class ChatMeetingController extends Controller
             'name' => 'required',
             'email' => 'required|unique:chat_meetings',
             'country' => 'required',
+            'app' => 'required',
             'birthdate' => 'required',
         ]);
 

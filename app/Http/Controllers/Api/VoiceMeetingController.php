@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\VoiceMeetingCollection;
+use App\Http\Resources\VoiceMeetingResource;
 use App\Models\VoiceMeeting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class VoiceMeetingController extends Controller
 {
@@ -15,7 +19,7 @@ class VoiceMeetingController extends Controller
      */
     public function index()
     {
-        //
+        return new VoiceMeetingCollection(VoiceMeeting::all());
     }
 
     /**
@@ -36,7 +40,27 @@ class VoiceMeetingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $validator = Validator::make($input, [
+            'name' => 'required',
+            'email' => 'required|unique:chat_meetings',
+            'country' => 'required',
+            'birthdate' => 'required',
+            'app' => 'required',
+            'meeting-date' => 'required',
+        ]);
+
+        if($validator->fails()){
+        return $this->sendError('Validation Error.', $validator->errors());
+        }
+
+        $voiceMeeting = VoiceMeeting::create($input);
+
+        return response()->json([
+            "success" => true,
+            "msg" => "Voice meeting created successfully.",
+            "voice-meeting" => new VoiceMeetingResource($voiceMeeting)
+        ]);
     }
 
     /**
@@ -47,7 +71,10 @@ class VoiceMeetingController extends Controller
      */
     public function show(VoiceMeeting $voiceMeeting)
     {
-        //
+        return response()->json([
+            'voice-meeting' => new VoiceMeetingResource($voiceMeeting),
+            'msg' => 'Success'],
+            200);
     }
 
     /**
@@ -70,7 +97,13 @@ class VoiceMeetingController extends Controller
      */
     public function update(Request $request, VoiceMeeting $voiceMeeting)
     {
-        //
+        $voiceMeeting->update($request->all());
+
+        return response()->json([
+            "success" => true,
+            "msg" => "Voice meeting updated successfully.",
+            "voice-meeting" => new VoiceMeetingResource($voiceMeeting)
+        ]);
     }
 
     /**
@@ -81,6 +114,12 @@ class VoiceMeetingController extends Controller
      */
     public function destroy(VoiceMeeting $voiceMeeting)
     {
-        //
+        $voiceMeeting->delete();
+
+        return response()->json([
+        "success" => true,
+        "msg" => "Voice meeting deleted successfully.",
+        "voice-meeting" => new VoiceMeetingResource($voiceMeeting)
+        ]);
     }
 }
