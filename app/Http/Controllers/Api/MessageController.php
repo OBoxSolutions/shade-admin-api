@@ -42,6 +42,7 @@ class MessageController extends Controller
         $input = $request->all();
         $validator = Validator::make($input, [
             'name' => 'required',
+            'subject' => 'required',
             'social' => 'required',
             'contact' => 'required|unique:messages',
             'text' => 'required'

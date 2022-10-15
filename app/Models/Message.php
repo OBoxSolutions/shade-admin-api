@@ -14,6 +14,7 @@ class Message extends Model
 
     protected $fillable = [
         'name',
+        'subject',
         'social',
         'contact',
         'text'
