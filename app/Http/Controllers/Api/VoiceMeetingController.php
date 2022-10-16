@@ -43,7 +43,7 @@ class VoiceMeetingController extends Controller
         $input = $request->all();
         $validator = Validator::make($input, [
             'name' => 'required',
-            'email' => 'required|unique:chat_meetings',
+            'email' => 'required|unique:voice_meetings',
             'country' => 'required',
             'birthdate' => 'required',
             'app' => 'required',
@@ -51,7 +51,11 @@ class VoiceMeetingController extends Controller
         ]);
 
         if($validator->fails()){
-        return $this->sendError('Validation Error.', $validator->errors());
+            return response()->json([
+                "success" => false,
+                "msg" => "Failed",
+                "errors" => $validator->errors()
+            ]);
         }
 
         $voiceMeeting = VoiceMeeting::create($input);

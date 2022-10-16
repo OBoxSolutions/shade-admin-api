@@ -20,7 +20,7 @@ class CreateHiringRequestsTable extends Migration
             $table->string('country');
             $table->string('applying-for');
             $table->string('birthdate');
-            $table->text('questions-answers')->nullable();
+            $table->text('answers')->nullable();
             $table->timestamps();
         });
     }

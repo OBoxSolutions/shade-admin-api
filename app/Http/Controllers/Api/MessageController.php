@@ -49,7 +49,11 @@ class MessageController extends Controller
         ]);
 
         if($validator->fails()){
-        return $this->sendError('Validation Error.', $validator->errors());
+            return response()->json([
+                "success" => false,
+                "msg" => "Failed",
+                "errors" => $validator->errors()
+            ]);
         }
 
         $message = Message::create($input);
@@ -116,9 +120,9 @@ class MessageController extends Controller
             $message->delete();
 
             return response()->json([
-            "success" => 1,
-            "msg" => "Message deleted successfully.",
-            "message" => new MessageResource($message)
+                "success" => 1,
+                "msg" => "Message deleted successfully.",
+                "message" => new MessageResource($message)
             ]);
 
         // }catch(Throwable $e){
@@ -139,10 +143,10 @@ class MessageController extends Controller
         ]);
 
         if($validator->fails()){
-            // return $this->sendError('Validation Error.', $validator->errors());
             return response()->json([
-                "success" => 0,
-                "msg" => "Error.", $validator->errors()
+                "success" => false,
+                "msg" => "Failed",
+                "errors" => $validator->errors()
             ]);
         }
 
