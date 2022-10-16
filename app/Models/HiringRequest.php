@@ -18,5 +18,6 @@ class HiringRequest extends Model
         'applying_for',
         'birthdate',
         'answers',
+        'files_link'
     ];
 }

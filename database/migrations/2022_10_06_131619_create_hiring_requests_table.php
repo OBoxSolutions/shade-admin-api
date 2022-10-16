@@ -21,6 +21,7 @@ class CreateHiringRequestsTable extends Migration
             $table->string('applying_for');
             $table->string('birthdate');
             $table->text('answers')->nullable();
+            $table->string('files_link')->nullable();
             $table->timestamps();
         });
     }
