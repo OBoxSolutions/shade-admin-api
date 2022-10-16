@@ -46,11 +46,15 @@ class ChatMeetingController extends Controller
             'email' => 'required|unique:chat_meetings',
             'country' => 'required',
             'app' => 'required',
-            'birthdate' => 'required',
+            'birthdate' => 'required'
         ]);
 
         if($validator->fails()){
-        return $this->sendError('Validation Error.', $validator->errors());
+            return response()->json([
+                "success" => false,
+                "msg" => "Failed",
+                "errors" => $validator->errors()
+            ]);
         }
 
         $chatMeeting = ChatMeeting::create($input);
@@ -116,9 +120,9 @@ class ChatMeetingController extends Controller
         $chatMeeting->delete();
 
         return response()->json([
-        "success" => true,
-        "msg" => "Chat meeting deleted successfully.",
-        "chat-meeting" => new ChatMeetingResource($chatMeeting)
+            "success" => true,
+            "msg" => "Chat meeting deleted successfully.",
+            "chat-meeting" => new ChatMeetingResource($chatMeeting)
         ]);
     }
 }

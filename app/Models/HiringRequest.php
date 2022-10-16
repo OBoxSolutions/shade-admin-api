@@ -17,6 +17,6 @@ class HiringRequest extends Model
         'country',
         'applying-for',
         'birthdate',
-        'questions-answers',
+        'answers',
     ];
 }

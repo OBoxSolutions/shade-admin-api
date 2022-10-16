@@ -46,11 +46,15 @@ class HiringRequestController extends Controller
             'country' => 'required',
             'applying-for' => 'required',
             'birthdate' => 'required',
-            'questions-answers' => 'required'
+            'answers' => 'required'
         ]);
 
         if($validator->fails()){
-        return $this->sendError('Validation Error.', $validator->errors());
+            return response()->json([
+                "success" => false,
+                "msg" => "Failed",
+                "errors" => $validator->errors()
+            ]);
         }
 
         $hiringRequest = HiringRequest::create($input);
@@ -116,9 +120,9 @@ class HiringRequestController extends Controller
         $hiringRequest->delete();
 
         return response()->json([
-        "success" => true,
-        "msg" => "Hiring request deleted successfully.",
-        "hiring-request" => new HiringRequestResource($hiringRequest)
+            "success" => true,
+            "msg" => "Hiring request deleted successfully.",
+            "hiring-request" => new HiringRequestResource($hiringRequest)
         ]);
     }
 }
