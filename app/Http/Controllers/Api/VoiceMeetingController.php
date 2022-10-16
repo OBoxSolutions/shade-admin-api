@@ -47,7 +47,7 @@ class VoiceMeetingController extends Controller
             'country' => 'required',
             'birthdate' => 'required',
             'app' => 'required',
-            'meeting-date' => 'required',
+            'meeting_date' => 'required',
         ]);
 
         if($validator->fails()){
@@ -63,7 +63,7 @@ class VoiceMeetingController extends Controller
         return response()->json([
             "success" => true,
             "msg" => "Voice meeting created successfully.",
-            "voice-meeting" => new VoiceMeetingResource($voiceMeeting)
+            "voice_meeting" => new VoiceMeetingResource($voiceMeeting)
         ]);
     }
 
@@ -76,7 +76,7 @@ class VoiceMeetingController extends Controller
     public function show(VoiceMeeting $voiceMeeting)
     {
         return response()->json([
-            'voice-meeting' => new VoiceMeetingResource($voiceMeeting),
+            'voice_meeting' => new VoiceMeetingResource($voiceMeeting),
             'msg' => 'Success'],
             200);
     }
@@ -106,7 +106,7 @@ class VoiceMeetingController extends Controller
         return response()->json([
             "success" => true,
             "msg" => "Voice meeting updated successfully.",
-            "voice-meeting" => new VoiceMeetingResource($voiceMeeting)
+            "voice_meeting" => new VoiceMeetingResource($voiceMeeting)
         ]);
     }
 
@@ -123,7 +123,7 @@ class VoiceMeetingController extends Controller
         return response()->json([
         "success" => true,
         "msg" => "Voice meeting deleted successfully.",
-        "voice-meeting" => new VoiceMeetingResource($voiceMeeting)
+        "voice_meeting" => new VoiceMeetingResource($voiceMeeting)
         ]);
     }
 }

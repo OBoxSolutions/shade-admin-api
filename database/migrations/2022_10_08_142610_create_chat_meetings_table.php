@@ -23,10 +23,10 @@ class CreateChatMeetingsTable extends Migration
             $table->text('about')->nullable();
             $table->text('goals')->nullable();
             $table->text('budget')->nullable();
-            $table->text('logo-info')->nullable();
-            $table->string('logo-file')->nullable();
-            $table->text('more-info')->nullable();
-            $table->string('more-info-files')->nullable();
+            $table->text('logo_info')->nullable();
+            $table->string('logo_file')->nullable();
+            $table->text('more_info')->nullable();
+            $table->string('more_info_files')->nullable();
             $table->timestamps();
         });
     }

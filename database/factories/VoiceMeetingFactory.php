@@ -19,9 +19,9 @@ class VoiceMeetingFactory extends Factory
             'country' => $this->faker->randomElement(['USA', 'Cuba', 'Russia', 'United Kingdom']),
             'birthdate' => $this->faker->dateTime(),
             'app' => $this->faker->randomElement(['Discord', 'Messanger', 'Twitter', 'Instagram']),
-            'meeting-date' => $this->faker->dateTime(),
-            'time-before-meeting' => $this->faker->randomElement(['15 min', '30 min', '45 min', '1h']),
-            'meeting-link' => $this->faker->url(),
+            'meeting_date' => $this->faker->dateTime(),
+            'time_before_meeting' => $this->faker->randomElement(['15 min', '30 min', '45 min', '1h']),
+            'meeting_link' => $this->faker->url(),
         ];
     }
 }

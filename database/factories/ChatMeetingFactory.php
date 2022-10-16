@@ -22,10 +22,10 @@ class ChatMeetingFactory extends Factory
             'about' => $this->faker->text(),
             'goals' => $this->faker->text(),
             'budget' => $this->faker->text(),
-            'logo-info' => $this->faker->text(),
-            'logo-file' => $this->faker->url(),
-            'more-info' => $this->faker->text(),
-            'more-info-files' => $this->faker->url(),
+            'logo_info' => $this->faker->text(),
+            'logo_file' => $this->faker->url(),
+            'more_info' => $this->faker->text(),
+            'more_info_files' => $this->faker->url(),
 
         ];
     }

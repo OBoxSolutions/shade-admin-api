@@ -15,7 +15,7 @@ class HiringRequest extends Model
         'name',
         'email',
         'country',
-        'applying-for',
+        'applying_for',
         'birthdate',
         'answers',
     ];

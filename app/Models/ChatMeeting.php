@@ -18,9 +18,9 @@ class ChatMeeting extends Model
         'about',
         'goals',
         'budget',
-        'logo-info',
-        'logo-file',
-        'more-info',
-        'more-info-files',
+        'logo_info',
+        'logo_file',
+        'more_info',
+        'more_info_files',
     ];
 }

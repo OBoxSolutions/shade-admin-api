@@ -44,7 +44,7 @@ class HiringRequestController extends Controller
             'name' => 'required',
             'email' => 'required|unique:hiring_requests',
             'country' => 'required',
-            'applying-for' => 'required',
+            'applying_for' => 'required',
             'birthdate' => 'required',
             'answers' => 'required'
         ]);
@@ -62,7 +62,7 @@ class HiringRequestController extends Controller
         return response()->json([
             "success" => true,
             "msg" => "Hiring request created successfully.",
-            "hiring-request" => new HiringRequestResource($hiringRequest)
+            "hiring_request" => new HiringRequestResource($hiringRequest)
         ]);
     }
 
@@ -75,7 +75,7 @@ class HiringRequestController extends Controller
     public function show(HiringRequest $hiringRequest)
     {
         return response()->json([
-            'hiring-request' => new HiringRequestResource($hiringRequest),
+            'hiring_request' => new HiringRequestResource($hiringRequest),
             'msg' => 'Success'],
             200);
     }
@@ -105,7 +105,7 @@ class HiringRequestController extends Controller
         return response()->json([
             "success" => true,
             "msg" => "Hiring request updated successfully.",
-            "hiring-request" => new HiringRequestResource($hiringRequest)
+            "hiring_request" => new HiringRequestResource($hiringRequest)
         ]);
     }
 
@@ -122,7 +122,7 @@ class HiringRequestController extends Controller
         return response()->json([
             "success" => true,
             "msg" => "Hiring request deleted successfully.",
-            "hiring-request" => new HiringRequestResource($hiringRequest)
+            "hiring_request" => new HiringRequestResource($hiringRequest)
         ]);
     }
 }
