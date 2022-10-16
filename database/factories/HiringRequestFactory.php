@@ -17,7 +17,7 @@ class HiringRequestFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'country' => $this->faker->randomElement(['USA', 'Cuba', 'Russia', 'United Kingdom']),
-            'applying-for' => $this->faker->randomElement(['Full-Stack Web Developer', 'General Manager ', 'SEO and Marketing Expert', 'Vice President']),
+            'applying_for' => $this->faker->randomElement(['Full-Stack Web Developer', 'General Manager ', 'SEO and Marketing Expert', 'Vice President']),
             'birthdate' => $this->faker->dateTime(),
             'answers' => $this->faker->randomElement(
                 [

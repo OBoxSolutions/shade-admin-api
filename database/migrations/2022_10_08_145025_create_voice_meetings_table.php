@@ -20,9 +20,9 @@ class CreateVoiceMeetingsTable extends Migration
             $table->string('country');
             $table->string('birthdate');
             $table->string('app');
-            $table->string('meeting-date');
-            $table->string('time-before-meeting')->nullable();
-            $table->string('meeting-link');
+            $table->string('meeting_date');
+            $table->string('time_before_meeting')->nullable();
+            $table->string('meeting_link');
             $table->timestamps();
         });
     }

@@ -62,7 +62,7 @@ class ChatMeetingController extends Controller
         return response()->json([
             "success" => true,
             "msg" => "Chat meeting created successfully.",
-            "chat-meeting" => new ChatMeetingResource($chatMeeting)
+            "chat_meeting" => new ChatMeetingResource($chatMeeting)
         ]);
     }
 
@@ -75,7 +75,7 @@ class ChatMeetingController extends Controller
     public function show(ChatMeeting $chatMeeting)
     {
         return response()->json([
-            'chat-meeting' => new ChatMeetingResource($chatMeeting),
+            'chat_meeting' => new ChatMeetingResource($chatMeeting),
             'msg' => 'Success'],
             200);
     }
@@ -105,7 +105,7 @@ class ChatMeetingController extends Controller
         return response()->json([
             "success" => true,
             "msg" => "Chat meeting updated successfully.",
-            "chat-meeting" => new ChatMeetingResource($chatMeeting)
+            "chat_meeting" => new ChatMeetingResource($chatMeeting)
         ]);
     }
 
@@ -122,7 +122,7 @@ class ChatMeetingController extends Controller
         return response()->json([
             "success" => true,
             "msg" => "Chat meeting deleted successfully.",
-            "chat-meeting" => new ChatMeetingResource($chatMeeting)
+            "chat_meeting" => new ChatMeetingResource($chatMeeting)
         ]);
     }
 }

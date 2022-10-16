@@ -15,9 +15,9 @@ class VoiceMeeting extends Model
         'country',
         'birthdate',
         'app',
-        'meeting-date',
-        'time-before-meeting',
-        'meeting-link',
+        'meeting_date',
+        'time_before_meeting',
+        'meeting_link',
 
     ];
 }

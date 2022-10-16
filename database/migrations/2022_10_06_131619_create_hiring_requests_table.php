@@ -18,7 +18,7 @@ class CreateHiringRequestsTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('country');
-            $table->string('applying-for');
+            $table->string('applying_for');
             $table->string('birthdate');
             $table->text('answers')->nullable();
             $table->timestamps();
