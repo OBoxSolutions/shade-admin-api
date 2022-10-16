@@ -25,7 +25,8 @@ class HiringRequestFactory extends Factory
                     'Answer 4, Answer 5, Answer 6',
                     'Answer 9, Answer 8, Answer 9',
                 ]
-            )
+                ),
+            'files_link' => $this->faker->url(),
         ];
     }
 }
