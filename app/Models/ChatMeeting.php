@@ -21,6 +21,6 @@ class ChatMeeting extends Model
         'logo_info',
         'logo_file',
         'more_info',
-        'more_info_files',
+        'more_info_file',
     ];
 }
