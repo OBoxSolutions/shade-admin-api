@@ -25,7 +25,7 @@ class ChatMeetingFactory extends Factory
             'logo_info' => $this->faker->text(),
             'logo_file' => $this->faker->url(),
             'more_info' => $this->faker->text(),
-            'more_info_files' => $this->faker->url(),
+            'more_info_file' => $this->faker->url(),
 
         ];
     }
