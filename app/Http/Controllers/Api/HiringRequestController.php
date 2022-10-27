@@ -46,7 +46,6 @@ class HiringRequestController extends Controller
             'country' => 'required',
             'applying_for' => 'required',
             'birthdate' => 'required',
-            'answers' => 'required'
         ]);
 
         if($validator->fails()){
