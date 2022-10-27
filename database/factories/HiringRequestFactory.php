@@ -19,13 +19,15 @@ class HiringRequestFactory extends Factory
             'country' => $this->faker->randomElement(['USA', 'Cuba', 'Russia', 'United Kingdom']),
             'applying_for' => $this->faker->randomElement(['Full-Stack Web Developer', 'General Manager ', 'SEO and Marketing Expert', 'Vice President']),
             'birthdate' => $this->faker->dateTime(),
-            'answers' => $this->faker->randomElement(
-                [
-                    'Answer 1, Answer 2, Answer 3',
-                    'Answer 4, Answer 5, Answer 6',
-                    'Answer 9, Answer 8, Answer 9',
-                ]
-                ),
+            'question_one' => $this->faker->text(),
+            'question_two' => $this->faker->text(),
+            'question_three' => $this->faker->text(),
+            'question_four' => $this->faker->text(),
+            'question_five' => $this->faker->text(),
+            'question_six' => $this->faker->text(),
+            'question_seven' => $this->faker->text(),
+            'question_eight' => $this->faker->text(),
+            'question_nine' => $this->faker->text(),
             'files_link' => $this->faker->url(),
         ];
     }

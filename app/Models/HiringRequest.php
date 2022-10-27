@@ -17,7 +17,15 @@ class HiringRequest extends Model
         'country',
         'applying_for',
         'birthdate',
-        'answers',
+        'question_one',
+        'question_two',
+        'question_three',
+        'question_four',
+        'question_five',
+        'question_six',
+        'question_seven',
+        'question_eight',
+        'question_nine',
         'files_link'
     ];
 }
