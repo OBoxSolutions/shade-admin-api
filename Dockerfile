@@ -26,6 +26,10 @@ ARG DATABASE_URL
 
 RUN composer install
 
-EXPOSE 80
-CMD php artisan serve --host=0.0.0.0 --port=80
+RUN echo "#!/bin/sh\n" \
+  "php artisan migrate --seed\n" \
+  "php artisan serve --host 0.0.0.0 --port 8000" > /app/start.sh
+
+RUN chmod +x /app/start.sh
+CMD ["/app/start.sh"]
 
