@@ -40,7 +40,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
-
         if (config('app.debug')) {
             return parent::render($request, $exception);
         }
@@ -58,6 +57,8 @@ class Handler extends ExceptionHandler
         }
 
         return response()->json(["success" => 0, "msg" =>'Unexpected Exception. Try later'], 500);
+
+
 
     }
 
