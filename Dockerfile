@@ -1,7 +1,11 @@
 # Dockerfile
 FROM php:7.4-cli
 
-RUN apt-get update; apt-get install -y wget libzip-dev php-pgsql
+RUN apt-get update; apt-get install -y wget libicu52 \
+        zlib1g \
+        sqlite3 \
+        git \
+        php5-pgsql \
 RUN docker-php-ext-install zip pdo_mysql pgsql pdo_pgsql
 RUN wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | php -- --install-dir=/usr/local/bin --filename=composer
 
