@@ -2,6 +2,10 @@
 FROM php:7.4-cli
 
 RUN apt-get update; apt-get install -y wget libicu52 \
+        libicu-dev \
+        zlib1g-dev \
+        libsqlite3-dev \
+        libpq-dev \
         libzip-dev \
         zlib1g \
         sqlite3 \
