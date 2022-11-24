@@ -2,13 +2,14 @@
 FROM php:7.4-cli
 
 RUN apt-get update; apt-get install -y wget libicu52 \
-        zip \
         zlib1g \
         sqlite3 \
         git \
         php5-pgsql \
 
-RUN docker-php-ext-install intl \
+RUN docker-php-ext-install \ 
+        zip \
+        intl \
         mbstring \
         pdo_mysql \
         pdo_pgsql \
