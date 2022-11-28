@@ -11,8 +11,7 @@ RUN apt-get update \
         libzip-dev \
         zlib1g \
         sqlite3 \
-        git \
-        php5-pgsql
+        git
 
 RUN docker-php-ext-install \ 
         zip \
