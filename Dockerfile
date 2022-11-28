@@ -16,12 +16,8 @@ RUN docker-php-ext-install \
         zip \
         intl \
         mbstring \
-        pdo_mysql \
-        pdo_pgsql \
         pdo \
-        pgsql \
-        zip \
-        pdo_sqlite \
+        pdo_pgsql
 
 RUN wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | php -- --install-dir=/usr/local/bin --filename=composer
 
