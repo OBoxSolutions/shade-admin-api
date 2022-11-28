@@ -10,7 +10,6 @@ RUN apt-get update \
         libpq-dev \
         libzip-dev \
         zlib1g \
-        sqlite3 \
         git
 
 RUN docker-php-ext-install \ 
