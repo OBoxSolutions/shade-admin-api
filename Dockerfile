@@ -1,7 +1,9 @@
 # Dockerfile
 FROM php:7.4-cli
 
-RUN apt-get update; apt-get install -y wget libicu52 \
+RUN apt-get update \
+        apt-get install -y wget \ 
+	libicu52 \
         libicu-dev \
         zlib1g-dev \
         libsqlite3-dev \
