@@ -1,7 +1,7 @@
 # Dockerfile
 FROM php:7.4-cli
 
-RUN apt-get update \
+RUN apt-get update &&
         apt-get install -y wget \ 
 	libicu52 \
         libicu-dev \
@@ -48,4 +48,3 @@ RUN echo "#!/bin/sh\n" \
 
 RUN chmod +x /app/start.sh
 CMD ["/app/start.sh"]
-
