@@ -1,26 +1,24 @@
 # Dockerfile
-FROM php:7.4-fpm
+FROM php:7.4-fpm-alpine
 
-RUN apt-get update && apt-get install -y \
+# Install dependencies
+RUN apk add --update --no-cache \
     git \
-    wget \
-    libpq-dev \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip
+    unzip \
+    libzip-dev \
+    postgresql-dev \
+ && docker-php-ext-install zip \
+ && docker-php-ext-install pgsql
 
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+# Import composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
+# Create application directory
+WORKDIR /var/www/html
+COPY . .
 
-RUN docker-php-ext-install pdo pdo_pgsql pgsql mbstring exif pcntl bcmath gd
+RUN composer install --no-dev --optimize-autoloader
 
-RUN wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | php -- --install-dir=/usr/local/bin --filename=composer
-
-WORKDIR /app
-COPY . /app
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
@@ -38,11 +36,4 @@ ARG DB_PASSWORD
 
 ARG DATABASE_URL
 
-RUN composer install
-
-RUN echo "#!/bin/sh\n" \
-  "php artisan migrate --seed --force\n" \
-  "php artisan serve --host 0.0.0.0 --port 8000" > /app/start.sh
-
-RUN chmod +x /app/start.sh
-CMD ["/app/start.sh"]
+EXPOSE 9000
