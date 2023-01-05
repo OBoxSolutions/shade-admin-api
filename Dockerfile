@@ -17,9 +17,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 WORKDIR /var/www/html
 COPY . .
 
-RUN composer install --no-dev --optimize-autoloader
-
-
 ENV COMPOSER_ALLOW_SUPERUSER=1
+RUN composer install --no-dev --optimize-autoloader
 
 EXPOSE 8000
