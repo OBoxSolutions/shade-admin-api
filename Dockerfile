@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
   unzip \
   && apt-get clean && rm -rf /var/lib/apt/lists/* \
   && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-  && pdo pdo_pgsql pgsql mbstring exif pcntl bcmath gd \
+  && docker-php-ext-install pdo pdo_pgsql pgsql mbstring exif pcntl bcmath gd \
   && wget https://raw.githubusercontent.com/composer/getcomposer.org/master/web/installer -O - -q | php -- --install-dir=/usr/local/bin --filename=composer
 
 
